@@ -14,9 +14,9 @@ class GetList extends React.Component {
 
     return (
       <ol>
-        <li>dfgdfg</li>
+        <li>task 1</li>
         {rows}
-        <li>kreudfhjukeh</li>
+        <li>task 2</li>
       </ol>
     );
   }
@@ -28,7 +28,7 @@ class GetTask extends React.Component {
     const name = this.props.task.name
 
     return (
-      <li>name</li>
+      <li>{name}</li>
     );
   }
 }
