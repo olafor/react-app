@@ -1,37 +1,36 @@
 import React from 'react';
 
-class GetList extends React.Component {
+class SetList extends React.Component {
   render() {
 
     const rows = [];
-
     this.props.tasks.forEach((t) => {
       rows.push(
-        <getTask
-          task={t} />
+        <SetTask task={t} />
       );
     });
+    console.log("rows: ", rows);
 
     return (
-      <ol>
-        <li>task 1</li>
-        {rows}
-        <li>task 2</li>
-      </ol>
+        <ol>
+            {rows}
+        </ol>
     );
   }
 }
 
-class GetTask extends React.Component {
+class SetTask extends React.Component {
   render() {
 
-    const name = this.props.task.name
+    const task = this.props.task;
 
     return (
-      <li>{name}</li>
+        <li key={task.id}>
+          {task.description}
+        </li>
     );
   }
 }
 
-export default GetList;
+export default SetList;
 
