@@ -1,31 +1,51 @@
 import React from 'react';
 
 class SetList extends React.Component {
-  render() {
+    constructor(props) {
+        super(props);
+        this.update = this.update.bind(this);
+    }
 
-    const rows = [];
-    this.props.tasks.forEach((t) => {
-      rows.push(
-        <SetTask task={t} />
-      );
-    });
-    console.log("rows: ", rows);
+    update(taskID) {
+        this.props.update(taskID);
+    }
 
-    return (
-        <ol>
-            {rows}
-        </ol>
-    );
-  }
+    render() {
+
+        const rows = [];
+        this.props.tasks.forEach((t) => {
+        rows.push(
+            <SetTask task={t}
+            update={this.props.update}/>
+        );
+        });
+
+        return (
+            <ol>
+                {rows}
+            </ol>
+        );
+    }
 }
 
 class SetTask extends React.Component {
-  render() {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
 
+    handleChange(event) {
+        event.preventDefault();
+        this.props.update(this.props.task.id);
+    }
+
+    render() {
     const task = this.props.task;
 
     return (
-        <li key={task.id}>
+        <li key={task.id}
+        style={{color: task.statusColor}}
+        onClick={this.handleChange}>
           {task.description}
         </li>
     );
