@@ -12,18 +12,26 @@ class SetList extends React.Component {
 
     render() {
 
-        const rows = [];
+        const rowsTODO = [];
+        const rowsDONE = [];
+
         this.props.tasks.forEach((t) => {
-        rows.push(
-            <SetTask task={t}
-            update={this.props.update}/>
-        );
+            if (t.statusColor === "black") {
+                rowsTODO.push(
+                    <SetTask task={t}
+                    update={this.props.update}/>);}
+            else {
+                rowsDONE.push(
+                    <SetTask task={t}
+                    update={this.props.update} />);
+            }
         });
 
         return (
-            <ol>
-                {rows}
-            </ol>
+            <div>
+                <ol>{rowsTODO}</ol>
+                <ul>{rowsDONE}</ul>
+            </div>
         );
     }
 }

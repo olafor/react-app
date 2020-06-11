@@ -30,8 +30,7 @@ class TodoList extends React.Component {
             if (this.state.allTasks[index].statusColor === "black") {
                 let temp = this.state.allTasks;
                 temp[index].statusColor = "green";
-                temp.push(temp[index]);
-                temp.splice(index, 1);
+                temp[index].description = temp[index].description + " - DONE!";
                 this.setState({allTasks: temp});
             }
             else {

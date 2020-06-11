@@ -15,6 +15,7 @@ class TaskInput extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         this.props.newTask(this.state.value);
+        this.setState({value: ''});
     }
 
     render() {
