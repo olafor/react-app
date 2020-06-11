@@ -25,28 +25,20 @@ class TodoList extends React.Component {
         let index = this.state.allTasks.findIndex((task) => {
             return task.id === taskID;
         });
-        console.log("index: ", index);
 
-        if (this.state.allTasks[index].statusColor === "black") {
-            let temp = this.state.allTasks;
-            temp[index].statusColor = "green";
-            console.log("temp: ", temp);
-            this.setState({allTasks: temp});
-        }
-        else if (this.state.allTasks[index].statusColor === "green") {
-            let temp = this.state.allTasks;
-            temp[index].statusColor = "red";
-            console.log("temp: ", temp);
-            this.setState({allTasks: temp});
-        }
-        else {
-            if (index > -1) {
+        if (index > -1) {
+            if (this.state.allTasks[index].statusColor === "black") {
                 let temp = this.state.allTasks;
-                if (index > -1) {
-                    temp.splice(index, 1);
-                    this.setState({allTasks: temp});
-                }
-              }
+                temp[index].statusColor = "green";
+                temp.push(temp[index]);
+                temp.splice(index, 1);
+                this.setState({allTasks: temp});
+            }
+            else {
+                let temp = this.state.allTasks;
+                temp.splice(index, 1);
+                this.setState({allTasks: temp});
+            }
         }
     }
 
