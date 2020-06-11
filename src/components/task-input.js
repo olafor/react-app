@@ -14,8 +14,10 @@ class TaskInput extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.newTask(this.state.value);
-        this.setState({value: ''});
+        if (this.state.value.length > 0) {
+            this.props.newTask(this.state.value);
+            this.setState({value: ''});
+        }
     }
 
     render() {
@@ -25,8 +27,11 @@ class TaskInput extends React.Component {
                     type="text"
                     placeholder="Enter a task..."
                     value={this.state.value}
-                    onChange={this.handleChange}/>
-                <button onClick={this.handleSubmit}>Submit task</button>
+                    onChange={this.handleChange}
+                    onClick={this.handleSubmit}/>
+                <button onClick={this.handleSubmit}>
+                    Add Task
+                </button>
             </form>
           );
     }

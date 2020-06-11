@@ -6,7 +6,7 @@ class SetList extends React.Component {
         this.update = this.update.bind(this);
     }
 
-    update(taskID) {
+    update(taskID, time) {
         this.props.update(taskID);
     }
 
@@ -19,7 +19,9 @@ class SetList extends React.Component {
             if (t.statusColor === "black") {
                 rowsTODO.push(
                     <SetTask task={t}
-                    update={this.props.update}/>);}
+                    update={this.props.update}
+                    timerToggle={this.timerToggle}/>
+                );}
             else {
                 rowsDONE.push(
                     <SetTask task={t}
@@ -39,12 +41,42 @@ class SetList extends React.Component {
 class SetTask extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            timerOn: true,
+            timeElapsed: 0
+        };
         this.handleChange = this.handleChange.bind(this);
+        this.timerToggle = this.timerToggle.bind(this);
+    }
+
+    tick() {
+        this.setState(state => ({
+            timeElapsed: state.timeElapsed + 1
+        }));
+    }
+
+    componentDidMount() {
+        if (this.state.timerOn && this.props.task.statusColor === "black") {
+            this.interval = setInterval(() => this.tick(), 1000);
+        }
+        else {
+            this.setState({timeElapsed: this.props.task.timeElapsed})
+        }
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     handleChange(event) {
         event.preventDefault();
-        this.props.update(this.props.task.id);
+        this.props.update(
+            this.props.task.id,
+            this.state.timeElapsed);
+    }
+
+    timerToggle() {
+        this.setState({timerToggle: !this.state.timerOn})
     }
 
     render() {
@@ -54,7 +86,7 @@ class SetTask extends React.Component {
         <li key={task.id}
         style={{color: task.statusColor}}
         onClick={this.handleChange}>
-          {task.description}
+          {task.description} ({this.state.timeElapsed})
         </li>
     );
   }

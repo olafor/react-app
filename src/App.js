@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import SetList from './components/task-list'
-import TaskInput from './components/task-input'
+import SetList from './components/task-list';
+import TaskInput from './components/task-input';
 
 class TodoList extends React.Component {
     constructor(props) {
@@ -13,15 +13,14 @@ class TodoList extends React.Component {
 
     getNewTask(newTask) {
         let task = {"description": newTask,
-        "statusColor": "black", "id": Math.random()};
-        console.log("new task: ", task);
+        "statusColor": "black", "id": Math.random(),
+        "timeElapsed": 0};
         this.setState({
             allTasks: [...this.state.allTasks, task]
         });
-        console.log("all tasks: ", this.state.allTasks);
     }
 
-    updateTask(taskID) {
+    updateTask(taskID, time) {
         let index = this.state.allTasks.findIndex((task) => {
             return task.id === taskID;
         });
@@ -30,7 +29,9 @@ class TodoList extends React.Component {
             if (this.state.allTasks[index].statusColor === "black") {
                 let temp = this.state.allTasks;
                 temp[index].statusColor = "green";
-                temp[index].description = temp[index].description + " - DONE!";
+                temp[index].timeElapsed = time;
+                temp.push(temp[index]);
+                temp.splice(index,1);
                 this.setState({allTasks: temp});
             }
             else {
@@ -46,7 +47,8 @@ class TodoList extends React.Component {
             <div>
                 <TaskInput newTask={this.getNewTask}/>
                 <SetList tasks={this.state.allTasks}
-                update={this.updateTask}/>
+                update={this.updateTask}
+                timerToggle={this.timerToggle}/>
             </div>
         );
     }
@@ -54,7 +56,10 @@ class TodoList extends React.Component {
 
 function App() {
   return (
+    <div>
+    <header style={{fontWeight: 'bold'}, {color: 'blue'}}>A simple TODO Application</header>
     <TodoList/>
+    </div>
   );
 }
 
