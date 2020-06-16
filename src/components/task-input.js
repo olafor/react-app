@@ -22,14 +22,28 @@ class TaskInput extends React.Component {
 
     render() {
         return (
-            <form>
-                <input
+            <form >
+                <input style={{
+                    width: "30%",
+                    margin: "8px 0",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                    padding: "12px 20px"
+                }}
                     type="text"
                     placeholder="Enter a task..."
                     value={this.state.value}
                     onChange={this.handleChange}
                     onClick={this.handleSubmit}/>
-                <button onClick={this.handleSubmit}>
+                <button style={
+                    {border: "2px solid black",
+                    borderRadius: "2px",
+                    backgroundColor: "black",
+                    color: "white",
+                    padding: "10px 15px"
+                    }}
+                    onClick={this.handleSubmit}>
                     Add Task
                 </button>
             </form>

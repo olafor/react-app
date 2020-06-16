@@ -13,8 +13,7 @@ class TodoList extends React.Component {
 
     getNewTask(newTask) {
         let task = {"description": newTask,
-        "statusColor": "black", "id": Math.random(),
-        "timeElapsed": 0};
+        "statusColor": "black", "id": Math.random()};
         this.setState({
             allTasks: [...this.state.allTasks, task]
         });
@@ -29,7 +28,6 @@ class TodoList extends React.Component {
             if (this.state.allTasks[index].statusColor === "black") {
                 let temp = this.state.allTasks;
                 temp[index].statusColor = "green";
-                temp[index].timeElapsed = time;
                 temp.push(temp[index]);
                 temp.splice(index,1);
                 this.setState({allTasks: temp});
@@ -47,8 +45,7 @@ class TodoList extends React.Component {
             <div>
                 <TaskInput newTask={this.getNewTask}/>
                 <SetList tasks={this.state.allTasks}
-                update={this.updateTask}
-                timerToggle={this.timerToggle}/>
+                update={this.updateTask} />
             </div>
         );
     }
@@ -57,7 +54,10 @@ class TodoList extends React.Component {
 function App() {
   return (
     <div>
-    <header style={{fontWeight: 'bold'}, {color: 'blue'}}>A simple TODO Application</header>
+    <header style={{
+        fontWeight: 'bold', color: 'black',
+        fontFamily: "Times New Roman"
+        }}>Plan your day!</header>
     <TodoList/>
     </div>
   );
