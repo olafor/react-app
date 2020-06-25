@@ -1,70 +1,52 @@
 import React from 'react';
 
-class SetList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.update = this.update.bind(this);
+function SetList(props) {
+    function updateFromTask(taskID) {
+        props.update(taskID);
     }
 
-    update(taskID, time) {
-        this.props.update(taskID, time);
-    }
-
-    render() {
-
-        const rowsTODO = [];
-        const rowsDONE = [];
-
-        this.props.tasks.forEach((t) => {
-            if (t.statusColor === "black") {
-                rowsTODO.push(
-                    <SetTask task={t}
-                    update={this.props.update}/>
-                );
-            }
-            else {
-                rowsDONE.push(
-                    <SetTask task={t}
-                    update={this.props.update} />);
-            }
-        });
-
-        return (
-            <div>
-                <ol
-                >{rowsTODO}</ol>
-                <ul >{rowsDONE}</ul>
-            </div>
-        );
-    }
+    return(
+        <div>
+            <ol>
+                {props.tasks.map((task) => {
+                    return (
+                        <SetTask key={task.id}
+                        task={task}
+                        update={updateFromTask} />
+                    )})}
+            </ol>
+        </div>
+    );
 }
 
-class SetTask extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(event) {
+function SetTask(props) {
+    function handleChange(event) {
         event.preventDefault();
-        this.props.update(
-            this.props.task.id);
+        props.update(props.task.id);
     }
 
-    render() {
-    const task = this.props.task;
-
-    return (
-        <li key={task.id}
-        style={{color: task.statusColor,
-        fontFamily: "Courier",
-        fontWeight: "bold",
-        padding: "10px"}}
-        onClick={this.handleChange}>
-          {task.description}
-        </li>
-    );
-  }
+    if (props.task.isDone) {
+        return (
+            <li
+            style={{color: 'green',
+            fontFamily: "Courier",
+            fontWeight: "bold",
+            padding: "10px"}}
+            onClick={handleChange}><del>
+            {props.task.description}
+            </del></li>
+        )}
+    else {
+        return (
+            <li key={props.task.id}
+            style={{color: 'black',
+            fontFamily: "Courier",
+            fontWeight: "bold",
+            padding: "10px"}}
+            onClick={handleChange}>
+            {props.task.description}
+            </li>
+        )}
 }
 
 export default SetList;

@@ -1,64 +1,61 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import SetList from './components/task-list';
 import TaskInput from './components/task-input';
 
-class TodoList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {allTasks: []};
-        this.getNewTask = this.getNewTask.bind(this);
-        this.updateTask = this.updateTask.bind(this);
+function TodoList() {
+    const [tasks, setTasks] = useState([]);
+    const [keyGen, setKeyGen] = useState(0);
+
+    useEffect(() => {
+        document.title = `${tasks.length} tasks`;
+    });
+
+    function getNewTask(newTask) {
+        let task = {"description": newTask, "isDone": false, "id": keyGen};
+        setKeyGen(keyGen + 1);
+        setTasks(tasks => [...tasks, task]);
     }
 
-    getNewTask(newTask) {
-        let task = {"description": newTask,
-        "statusColor": "black", "id": Math.random()};
-        this.setState({
-            allTasks: [...this.state.allTasks, task]
-        });
-    }
-
-    updateTask(taskID, time) {
-        let index = this.state.allTasks.findIndex((task) => {
+    function updateFromTask(taskID) {
+        let index = tasks.findIndex((task) => {
             return task.id === taskID;
         });
 
+        let temp = tasks;
+
         if (index > -1) {
-            if (this.state.allTasks[index].statusColor === "black") {
-                let temp = this.state.allTasks;
-                temp[index].statusColor = "green";
-                temp.push(temp[index]);
+            if (tasks[index].isDone) {
                 temp.splice(index,1);
-                this.setState({allTasks: temp});
+                console.log("removed");
             }
             else {
-                let temp = this.state.allTasks;
-                temp.splice(index, 1);
-                this.setState({allTasks: temp});
+                temp[index].isDone = true;
+                console.log("done");
             }
         }
+        setTasks(temp => [...temp]);
     }
 
-    render () {
-        return(
-            <div>
-                <TaskInput newTask={this.getNewTask}/>
-                <SetList tasks={this.state.allTasks}
-                update={this.updateTask} />
-            </div>
-        );
-    }
+    return(
+        <div>
+            <TaskInput newTask={getNewTask}/>
+            <SetList tasks={tasks}
+            update={updateFromTask} />
+        </div>
+    );
 }
 
 function App() {
   return (
     <div>
     <header style={{
-        fontWeight: 'bold', color: 'black',
-        fontFamily: "Times New Roman"
-        }}>Plan your day!</header>
-    <TodoList/>
+        fontWeight: 'bold',
+        color: 'black',
+        fontFamily: "Times New Roman"}}>
+            Plan your day!
+    </header>
+        <TodoList/>
     </div>
   );
 }
