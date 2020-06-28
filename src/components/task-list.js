@@ -7,7 +7,7 @@ function SetList(props) {
 
     return(
         <div>
-            <ol>
+            <ol style={{textAlign: 'left', paddingLeft: '30%', paddingRight: '30%'}}>
                 {props.tasks.map((task) => {
                     return (
                         <SetTask key={task.id}
@@ -50,7 +50,7 @@ function SetTask(props) {
             </del>
             <button style={{marginLeft: '1.0em',
                 border: "1.5px solid black",
-                borderRadius: "2px",
+                borderRadius: "5px",
                 backgroundColor: "red",
                 color: "black",
                 padding: "5px 8px",
@@ -73,7 +73,7 @@ function SetTask(props) {
                 {props.task.description}</span>
             <button style={{marginRight: '1.0em',
                 border: "1.5px solid black",
-                borderRadius: "2px",
+                borderRadius: "5px",
                 backgroundColor: "yellow",
                 color: "black",
                 padding: "5px 8px",
@@ -85,7 +85,7 @@ function SetTask(props) {
                 Select
             </button>
             <button style={{border: "1.5px solid black",
-                borderRadius: "2px",
+                borderRadius: "5px",
                 backgroundColor: "green",
                 color: "black",
                 padding: "5px 8px",

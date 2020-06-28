@@ -27,11 +27,9 @@ function TodoList() {
         if (index > -1) {
             if (tasks[index].isDone) {
                 temp.splice(index,1);
-                console.log("removed");
             }
             else {
                 temp[index].isDone = true;
-                console.log("done");
             }
         }
         setTasks(temp => [...temp]);
