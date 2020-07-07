@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 
-function TaskInput(props) {
+const  TaskInput = (props) => {
     const [textField, setTextField] = useState('');
 
-    function handleChange(event) {
+    const handleChange = (event) => {
         setTextField(event.target.value);
     }
 
-    function handleSubmit(event) {
+    const handleSubmit = (event) => {
         event.preventDefault();
         if (textField.length > 0) {
             props.newTask(textField);

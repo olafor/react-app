@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SetList(props) {
+const SetList = (props) => {
     function updateFromTask(taskID) {
         props.update(taskID);
     }
@@ -21,20 +21,20 @@ function SetList(props) {
 
 function SetTask(props) {
 
-    function increaseOpacity(event) {
+    const increaseOpacity = (event) => {
         event.target.style.opacity = 1;
     }
 
-    function decreaseOpacity(event) {
+    const decreaseOpacity = (event) => {
         event.target.style.opacity = 0.7;
     }
 
-    function handleChange(event) {
+    const handleChange = (event) => {
         event.preventDefault();
         props.update(props.task.id);
     }
 
-    function takeTime(event) {
+    const takeTime = (event) => {
         event.preventDefault();
     }
 

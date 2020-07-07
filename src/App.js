@@ -4,19 +4,19 @@ import './App.css';
 import SetList from './components/task-list';
 import TaskInput from './components/task-input';
 
-function TodoList() {
+const TodoList = () => {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
         document.title = `${tasks.length} tasks`;
     });
 
-    function getNewTask(newTask) {
+    const getNewTask = (newTask) => {
         let task = {"description": newTask, "isDone": false, "id": v4()};
         setTasks(tasks => [...tasks, task]);
     }
 
-    function updateFromTask(taskID) {
+    const updateFromTask = (taskID) => {
         let index = tasks.findIndex((task) => {
             return task.id === taskID;
         });
@@ -43,7 +43,7 @@ function TodoList() {
     );
 }
 
-function App() {
+const App = () => {
   return (
     <div>
     <header style={{
