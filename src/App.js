@@ -1,19 +1,18 @@
 import React, {useState, useEffect} from 'react';
+import {v4} from 'uuid'
 import './App.css';
 import SetList from './components/task-list';
 import TaskInput from './components/task-input';
 
 function TodoList() {
     const [tasks, setTasks] = useState([]);
-    const [keyGen, setKeyGen] = useState(0);
 
     useEffect(() => {
         document.title = `${tasks.length} tasks`;
     });
 
     function getNewTask(newTask) {
-        let task = {"description": newTask, "isDone": false, "id": keyGen};
-        setKeyGen(keyGen + 1);
+        let task = {"description": newTask, "isDone": false, "id": v4()};
         setTasks(tasks => [...tasks, task]);
     }
 
