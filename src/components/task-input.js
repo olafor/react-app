@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button, TextField } from '@material-ui/core';
 
 const TaskInput = (props) => {
   const [textField, setTextField] = useState('');
@@ -17,34 +18,21 @@ const TaskInput = (props) => {
 
   return (
     <form>
-      <input
-        style={{
-          width: '30%',
-          margin: '8px 0',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
-          boxSizing: 'border-box',
-          padding: '12px 20px',
-        }}
+      <TextField
         type="text"
-        placeholder="Enter a task..."
+        label="Enter a task..."
         value={textField}
         onChange={handleChange}
         onClick={handleSubmit}
       />
-      <button
-        type="button"
-        style={{
-          border: '2px solid black',
-          borderRadius: '2px',
-          backgroundColor: 'black',
-          color: 'white',
-          padding: '10px 15px',
-        }}
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
         onClick={handleSubmit}
       >
         Add Task
-      </button>
+      </Button>
     </form>
   );
 };

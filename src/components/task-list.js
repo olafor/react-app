@@ -1,7 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-
-const Opacity = { low: 0.6, high: 1 };
+import { Button } from '@material-ui/core';
 
 const SetTask = (props) => {
   const handleChange = (event) => {
@@ -15,50 +13,17 @@ const SetTask = (props) => {
 
   if (props.task.isDone) {
     return (
-      <li
-        style={{
-          color: 'green',
-          fontFamily: 'Courier',
-          fontWeight: 'bold',
-          padding: '10px',
-        }}
-        onClick={handleChange}
-      >
+      <li onClick={handleChange}>
         <del>{props.task.description}</del>
-        <button
-          type="button"
-          style={{
-            marginLeft: '1.0em',
-            border: '1.5px solid black',
-            borderRadius: '5px',
-            backgroundColor: 'red',
-            color: 'black',
-            padding: '5px 8px',
-            fontSize: '15px',
-            opacity: '0.7',
-          }}
-          onMouseEnter={(event) => {
-            event.target.style.opacity = Opacity.high;
-          }}
-          onMouseLeave={(event) => {
-            event.target.style.opacity = Opacity.low;
-          }}
-        >
+        <Button color="secondary" variant="contained">
           Remove
-        </button>
+        </Button>
       </li>
     );
   }
 
   return (
-    <li
-      style={{
-        color: 'black',
-        fontFamily: 'Courier',
-        fontWeight: 'bold',
-        padding: '10px',
-      }}
-    >
+    <li>
       <span
         role="presentation"
         onClick={handleChange}
@@ -71,49 +36,12 @@ const SetTask = (props) => {
       >
         {props.task.description}
       </span>
-      <button
-        type="button"
-        style={{
-          marginRight: '1.0em',
-          border: '1.5px so     lid black',
-          borderRadius: '5px',
-          backgroundColor: 'yellow',
-          color: 'black',
-          padding: '5px 8px',
-          fontSize: '15px',
-          opacity: '0.7',
-        }}
-        onClick={takeTime}
-        onMouseEnter={(event) => {
-          event.target.style.opacity = Opacity.high;
-        }}
-        onMouseLeave={(event) => {
-          event.target.style.opacity = Opacity.low;
-        }}
-      >
+      <Button color="primary" variant="contained" onClick={takeTime}>
         Select
-      </button>
-      <button
-        type="button"
-        style={{
-          border: '1.5px solid black',
-          borderRadius: '5px',
-          backgroundColor: 'green',
-          color: 'black',
-          padding: '5px 8px',
-          fontSize: '15px',
-          opacity: '0.7',
-        }}
-        onClick={handleChange}
-        onMouseEnter={(event) => {
-          event.target.style.opacity = Opacity.high;
-        }}
-        onMouseLeave={(event) => {
-          event.target.style.opacity = Opacity.low;
-        }}
-      >
+      </Button>
+      <Button color="secondary" variant="contained" onClick={handleChange}>
         Done
-      </button>
+      </Button>
     </li>
   );
 };
