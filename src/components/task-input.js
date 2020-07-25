@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 
 const TaskInput = (props) => {
   const [textField, setTextField] = useState('');
@@ -17,23 +19,29 @@ const TaskInput = (props) => {
   };
 
   return (
-    <form>
-      <TextField
-        type="text"
-        label="Enter a task..."
-        value={textField}
-        onChange={handleChange}
-        onClick={handleSubmit}
-      />
-      <Button
-        variant="contained"
-        color="primary"
-        type="submit"
-        onClick={handleSubmit}
-      >
-        Add Task
-      </Button>
-    </form>
+    <AppBar position="static" color="default">
+      <Toolbar>
+        <form>
+          <TextField
+            type="text"
+            variant="filled"
+            color="primary"
+            label="Enter a task..."
+            value={textField}
+            onChange={handleChange}
+            onClick={handleSubmit}
+          />
+          <Button
+            variant="contained"
+            color="secundary"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            Add Task
+          </Button>
+        </form>
+      </Toolbar>
+    </AppBar>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { Button, ButtonGroup } from '@material-ui/core';
 
 const SetTask = (props) => {
   const handleChange = (event) => {
@@ -36,12 +36,18 @@ const SetTask = (props) => {
       >
         {props.task.description}
       </span>
-      <Button color="primary" variant="contained" onClick={takeTime}>
-        Select
-      </Button>
-      <Button color="secondary" variant="contained" onClick={handleChange}>
-        Done
-      </Button>
+      <ButtonGroup
+        variant="contained"
+        color="primary"
+        aria-label="contained primary button group"
+      >
+        <Button color="primary" variant="contained" onClick={takeTime}>
+          Select
+        </Button>
+        <Button color="secondary" variant="contained" onClick={handleChange}>
+          Done
+        </Button>
+      </ButtonGroup>
     </li>
   );
 };

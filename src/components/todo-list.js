@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 import { v4 } from 'uuid';
 import SetTask from './task-list';
 import TaskInput from './task-input';
@@ -32,16 +32,14 @@ const TodoList = () => {
   };
 
   return (
-    <Grid container justify="center" spacing={10} style={{ padding: '20px' }}>
-      <Grid item>
-        <TaskInput newTask={getNewTask} />
-        <ol align="right">
-          {tasks.map((task) => (
-            <SetTask key={task.id} task={task} update={updateFromTask} />
-          ))}
-        </ol>
-      </Grid>
-    </Grid>
+    <div>
+      <TaskInput newTask={getNewTask} />
+      <ol>
+        {tasks.map((task) => (
+          <SetTask key={task.id} task={task} update={updateFromTask} />
+        ))}
+      </ol>
+    </div>
   );
 };
 
