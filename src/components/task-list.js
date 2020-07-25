@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, ButtonGroup } from '@material-ui/core';
+import { Button, ButtonGroup, Paper } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 
 const SetTask = (props) => {
   const handleChange = (event) => {
@@ -13,42 +14,44 @@ const SetTask = (props) => {
 
   if (props.task.isDone) {
     return (
-      <li onClick={handleChange}>
+      <Paper onClick={handleChange}>
         <del>{props.task.description}</del>
         <Button color="secondary" variant="contained">
           Remove
         </Button>
-      </li>
+      </Paper>
     );
   }
 
   return (
-    <li>
-      <span
-        role="presentation"
-        onClick={handleChange}
-        style={{ marginRight: '1.0em' }}
-        onKeyPress={(event) => {
-          if (event.key === 'Space') {
-            handleChange();
-          }
-        }}
-      >
-        {props.task.description}
-      </span>
-      <ButtonGroup
-        variant="contained"
-        color="primary"
-        aria-label="contained primary button group"
-      >
-        <Button color="primary" variant="contained" onClick={takeTime}>
-          Select
-        </Button>
-        <Button color="secondary" variant="contained" onClick={handleChange}>
-          Done
-        </Button>
-      </ButtonGroup>
-    </li>
+    <Grid item>
+      <Paper elevation={3} variant="outlined" square>
+        <span
+          role="presentation"
+          onClick={handleChange}
+          style={{ marginRight: '1.0em' }}
+          onKeyPress={(event) => {
+            if (event.key === 'Space') {
+              handleChange();
+            }
+          }}
+        >
+          {props.task.description}
+        </span>
+        <ButtonGroup
+          variant="contained"
+          color="primary"
+          aria-label="contained primary button group"
+        >
+          <Button color="primary" variant="contained" onClick={takeTime}>
+            Select
+          </Button>
+          <Button color="secondary" variant="contained" onClick={handleChange}>
+            Done
+          </Button>
+        </ButtonGroup>
+      </Paper>
+    </Grid>
   );
 };
 
